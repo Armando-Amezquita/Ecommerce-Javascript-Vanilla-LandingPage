@@ -4,14 +4,19 @@ const navbarShoppingCar = document.querySelector('.navbar-shopping-cart');
 const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const asideMenu = document.querySelector('.product-detail');
+const selectProductDetail = document.querySelector('#selectProductDetail');
+const productDetailClosed = document.querySelector('.product-detail-close');
 
 navbarEmail.addEventListener('click', toggleNavbarMenu);
 hambuguerMenu.addEventListener('click', togglehambuguerMenu);
 navbarShoppingCar.addEventListener('click', toggleCarMenu);
+productDetailClosed.addEventListener('click', closedSelectProductDetail);
+
 
 function toggleNavbarMenu(){
     // desktopMenu.classList.toggle('activeDesktopMenu');
     const navbarCar = asideMenu.classList.contains('inactive');
+    closedSelectProductDetail();
     if(!navbarCar){
         asideMenu.classList.add('inactive');
     }
@@ -21,6 +26,7 @@ function toggleNavbarMenu(){
 function togglehambuguerMenu(){
     const aside = asideMenu.classList.contains('inactive');
 
+    closedSelectProductDetail();
     if(!aside){
         asideMenu.classList.add('inactive');
     }
@@ -37,6 +43,7 @@ function toggleCarMenu(){
     const mobile = mobileMenu.classList.contains('inactive');
     const desktop = desktopMenu.classList.contains('inactive');
 
+    closedSelectProductDetail();
     if(!mobile){
         mobileMenu.classList.add('inactive');
     }
@@ -75,6 +82,7 @@ function renderListProducts (listProducts){
         const cardsContainer = document.querySelector('.cards-container');
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
+        productCard.addEventListener('click', openSelectProductDetail)
     
         const imageProductCard = document.createElement('img');
         imageProductCard.setAttribute('src', product.img);
@@ -110,3 +118,13 @@ function renderListProducts (listProducts){
 }
 
 renderListProducts(productList);
+
+function openSelectProductDetail(){
+    selectProductDetail.classList.remove('inactive');
+    asideMenu.classList.add('inactive');
+}
+
+
+function closedSelectProductDetail(){
+    selectProductDetail.classList.add('inactive');
+}
